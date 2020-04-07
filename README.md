@@ -1,68 +1,75 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# TODO LIST WITH REDUX
 
-## Available Scripts
+## SETUP 
+- yarn add redux
+- yarn add react-redux (for connecting react with redux together)
 
-In the project directory, you can run:
+## Create UI follow the tasks (Todo list)
 
-### `yarn start`
+- Form
+- List
+- Other components (Button, input... so on)
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## Create architecture follow feature and actions
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+We need to build an app which can add, remove, delete a task.
 
-### `yarn test`
+### Create feature > Todo > redux (folder)
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+1. action.js 
+2. types.js
+3. reducers.js
 
-### `yarn build`
+-----
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+# Define:
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+## types.js
+This is file where we create a variable constat for each action (Follow feature).
+E.g: ADD_TODO, TOGGLE_TODO, REMOVE_TODO;
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## actions.js
 
-### `yarn eject`
+1. import type of actions from "types" file
+2. Follow (three) action features we have (three) const respectively
+3. For each actions we have to follow some rules:
+- It always return an object.
+- The object has only 2 keys: type & payload(data)
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+4. The name of funtions follow above features (while you read the names you can understand what it will do)
+- The name of funtions must with in camelCase
+- The paragram(s) of funtion should be (a/an) feature(s)/elements which concern the actions. (sometimes, it is exactly an element in payload, depenting on which action it can do)
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+5. The "type" in the function: 
+- It is should write same the name of function but writting in uppercase and having "_"
+- It defines which type of the action.
+- Each action has a formal data follow above features
+E.g: 
+- ADD_TODO: has title
+- TOGGLE_TODO: has isCompleted
+- removeTodo has id (which can select exactly item for acting)
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+6. the "payload" in functions:
+- It is an object
+- It contains data which have key, value follow(s) the features which can use in other functions (data)
+- Sometimes it have name of keys exactly the paragrams of function(s) 
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+Examples
 
-## Learn More
+export const addTodo = title => ({
+  type: ADD_TODO,
+  payload: {
+    id: Math.random(new Date()),
+    title
+  }
+})
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## Define reducers
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+1. import type of actions from "types" file
+2. Always create an initialState which follow rules:
+- It have some default value,
+- 
 
-### Code Splitting
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
 
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `yarn build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
