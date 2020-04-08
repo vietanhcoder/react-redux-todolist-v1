@@ -25,7 +25,7 @@ We need to build an app which can add, remove, delete a task.
 # Define:
 
 ## types.js
-This is file where we create a variable constat for each action (Follow feature).
+This is file where we create a variable const for each action (Follow feature).
 E.g: ADD_TODO, TOGGLE_TODO, REMOVE_TODO;
 
 ## actions.js
@@ -38,7 +38,7 @@ E.g: ADD_TODO, TOGGLE_TODO, REMOVE_TODO;
 
 4. The name of funtions follow above features (while you read the names you can understand what it will do)
 - The name of funtions must with in camelCase
-- The paragram(s) of funtion should be (a/an) feature(s)/elements which concern the actions. (sometimes, it is exactly an element in payload, depenting on which action it can do)
+- The paragram(s) of funtion should be (a/an) feature(s)/elements which concern the actions. (sometimes, it is exactly an element in payload, depending on which action it can do)
 
 5. The "type" in the function: 
 - It is should write same the name of function but writting in uppercase and having "_"
@@ -65,11 +65,62 @@ export const addTodo = title => ({
 })
 
 ## Define reducers
+It specify how the application's state changes in response to actions sent to the store. (Only what happened NOT HOW the the app's state changes)
 
 1. import type of actions from "types" file
 2. Always create an initialState which follow rules:
 - It have some default value,
-- 
+- It can contain much data
+- Our state as normalized as possible, without any nesting ( ID as a key, use IDs to reference it from other entities, or lists).
+3. The reducers are always received 2 params: state & action: 
+- state: it's an initial state
+- action: it's an object which contains: 
 
+* key: ...?
+* payload (follow payload value in action)
 
+# Create and configure store for the apps
 
+1. Create stores.js where is equal lv with file index. 
+2. import "createStore" from redux for creating store and "combineReducers" to combine all reducers together from 'react'.
+3. import reducers from feature which we defined above.
+4. Create const allReducers function which stores all the reducers we have.
+5. Create const reducers which use as an object para in the combineReducers (which import from redux) for store all the reducers as an object.
+
+6. import composeWithDevTools from 'redux-devtools-extension'
+7. Create stores by createStore(reducers, composeWithDevTools());
+
+--> create store!!!
+
+Refer:  config redux using with react
+https://redux.js.org/basics/usage-with-react#passing-the-store
+
+## Create redux dev-tools to tracking store of app
+
+1. Install exntesion for chrome: 
+https://chrome.google.com/webstore/detail/redux-devtools/lmhkpmbekcpmknklioeibfkpmmfibljd
+
+2. install redux-devtools-extension: to config
+
+- yarn add redux-devtools-extension --dev
+https://github.com/zalmoxisus/redux-devtools-extension#13-use-redux-devtools-extension-package-from-npm
+
+## Connect redux with react together
+1. Go to Todos feature: src/features/Todo.js
+2. import {connect} from 'react-redux' (should install react-redux first)
+3. import the action which should use in this components
+4. write normal the function concern this action to render UI
+5. Create a const mapStatetoProps which have a para state. 
+- todoReducers is an object which was stored in the stores.js. In fact, it is reducers function in reducers.js (because export default we can change the name of function)
+- Use to get (a) state from store of redux
+- always return object.
+
+6. Create an variable mapDispatchToProps:
+- use to dispatch an action in redux
+- always return object.
+- import action into the component
+
+7. use "connect" function (high order function) to connect redux &react
+
+- alway transfer 2 params into mapStateToProps & mapDispatchToprops.
+- If one of them doesn't have/ please enter null
