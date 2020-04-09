@@ -3,6 +3,7 @@
 ## SETUP 
 - yarn add redux
 - yarn add react-redux (for connecting react with redux together)
+- yarn add redux-devtools-extension --dev
 
 ## Create UI follow the tasks (Todo list)
 
@@ -16,8 +17,8 @@ We need to build an app which can add, remove, delete a task.
 
 ### Create feature > Todo > redux (folder)
 
-1. action.js 
-2. types.js
+1. types.js
+2. action.js
 3. reducers.js
 
 -----
@@ -30,18 +31,20 @@ E.g: ADD_TODO, TOGGLE_TODO, REMOVE_TODO;
 
 ## actions.js
 
+(Only what happened NOT HOW the the app's state changes)
+
 1. import type of actions from "types" file
 2. Follow (three) action features we have (three) const respectively
 3. For each actions we have to follow some rules:
 - It always return an object.
 - The object has only 2 keys: type & payload(data)
 
-4. The name of funtions follow above features (while you read the names you can understand what it will do)
-- The name of funtions must with in camelCase
-- The paragram(s) of funtion should be (a/an) feature(s)/elements which concern the actions. (sometimes, it is exactly an element in payload, depending on which action it can do)
+4. The name of functions follow above features (while you read the names you can understand what it will do)
+- The name of functions must with in camelCase
+- The parameter(s) of function should be (a/an) feature(s)/elements which concern the actions. (sometimes, it is exactly an element in payload, depending on which action it can do)
 
 5. The "type" in the function: 
-- It is should write same the name of function but writting in uppercase and having "_"
+- It is should write same the name of function but writing in uppercase and having "_"
 - It defines which type of the action.
 - Each action has a formal data follow above features
 E.g: 
@@ -52,7 +55,7 @@ E.g:
 6. the "payload" in functions:
 - It is an object
 - It contains data which have key, value follow(s) the features which can use in other functions (data)
-- Sometimes it have name of keys exactly the paragrams of function(s) 
+- Sometimes it have name of keys exactly the parameters of function(s) 
 
 Examples
 
@@ -65,7 +68,7 @@ export const addTodo = title => ({
 })
 
 ## Define reducers
-It specify how the application's state changes in response to actions sent to the store. (Only what happened NOT HOW the the app's state changes)
+It specify HOW the application's state changes in response to actions sent to the store. 
 
 1. import type of actions from "types" file
 2. Always create an initialState which follow rules:
@@ -124,3 +127,20 @@ https://github.com/zalmoxisus/redux-devtools-extension#13-use-redux-devtools-ext
 
 - alway transfer 2 params into mapStateToProps & mapDispatchToprops.
 - If one of them doesn't have/ please enter null
+
+
+8. edit file index, 
+import {Provider} from 'react-redux
+Provider store={stores}
+------
+
+Sau khi xd UI thì mình cần phải định nghĩa các tương tác của người dùng 
+==> Tạo ra file types.js để định nghĩa các loại hành động.
+
+Việc truyền Dispatch tương ứng với khi chúng ta định nghĩa action trong file actions
+- trong đó sẽ có loại action tương ứng với hành động liên quan
+- data được chứa trong payload
+
+==> Như vậy việc tạo actions.js tương ứng với action creator, action dispatch, 
+
+Truyền và thực thi là việc tạo store, connect redux và react.
